@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->nullable;
-            $table->string('name');
-            $table->string('prezzo_totale');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('totale', 10, 2);
+            $table->enum('stato', ['in_attesa', 'spedito', 'completato'])->default('in_attesa');
             $table->timestamps();
         });
     }
